@@ -1,0 +1,22 @@
+{
+  "Proizvodi": [
+    {
+      "Id": 1,
+      "Naziv": "Hard Disk",
+      "Opis": "Disk za cuvanje podataka",
+      "Kategorija": "Elektronika",
+      "Proizvodjac": "HP",
+      "Dobavljac": "WinWin",
+      "Cena": "1000"
+    },
+    {
+      "Id": 2,
+      "Naziv": "Sportska Torba",
+      "Opis": "Torba za trening",
+      "Kategorija": "Sport",
+      "Proizvodjac": "Adidas",
+      "Dobavljac": "Sport Vision",
+      "Cena": "700"
+    }
+  ]
+}
