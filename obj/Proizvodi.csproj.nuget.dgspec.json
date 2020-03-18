@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Lazar\\Desktop\\Proizvodi\\Proizvodi\\Proizvodi\\Proizvodi.csproj": {}
+    "D:\\Projekti\\Proizvodi\\Proizvodi.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Lazar\\Desktop\\Proizvodi\\Proizvodi\\Proizvodi\\Proizvodi.csproj": {
+    "D:\\Projekti\\Proizvodi\\Proizvodi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Lazar\\Desktop\\Proizvodi\\Proizvodi\\Proizvodi\\Proizvodi.csproj",
+        "projectUniqueName": "D:\\Projekti\\Proizvodi\\Proizvodi.csproj",
         "projectName": "Proizvodi",
-        "projectPath": "C:\\Users\\Lazar\\Desktop\\Proizvodi\\Proizvodi\\Proizvodi\\Proizvodi.csproj",
+        "projectPath": "D:\\Projekti\\Proizvodi\\Proizvodi.csproj",
         "packagesPath": "C:\\Users\\Lazar\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Lazar\\Desktop\\Proizvodi\\Proizvodi\\Proizvodi\\obj\\",
+        "outputPath": "D:\\Projekti\\Proizvodi\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Lazar\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -37,6 +37,12 @@
       },
       "frameworks": {
         "netcoreapp3.0": {
+          "dependencies": {
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[12.0.3, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
