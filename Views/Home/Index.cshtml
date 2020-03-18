@@ -1,4 +1,83 @@
 ﻿@model ProizvodiViewModel
 @{
-    var jsonModel = Model.jsonProizvodi.proizvodi;
+    var jsonModelList = Model.jsonProizvodi.proizvodi;
+
+    var dbModelList = Model.dbProizvodi.proizvodi;
+
+    var a = 2;
+
+    var type = "json";
 }
+<html>
+<head>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+        }
+         button{
+             min-width : 50px;
+             min-height: 20px;
+         }
+    </style>
+</head>
+<body>
+    <form>
+@if (jsonModelList != null && jsonModelList.Count > 0)
+{
+    <h1>Json proizvodi</h1>
+    <table>
+        <tr>
+            <th>Naziv</th>
+            <th>Opis</th>
+            <th>Kategorija</th>
+            <th>Proizvodjac</th>
+            <th>Dobavljac</th>
+            <th>Cena</th>
+            <th>Izmena</th>
+        </tr>
+        @foreach (var jsonModel in jsonModelList)
+        {
+            <tr>
+                <td>@jsonModel.Naziv</td>
+                <td>@jsonModel.Opis</td>
+                <td>@jsonModel.Kategorija</td>
+                <td>@jsonModel.Proizvodjac</td>
+                <td>@jsonModel.Dobavljac</td>
+                <td>@jsonModel.Cena</td>
+                <td><button asp-action="EditJson" asp-controller="Home" asp-route-id="@jsonModel.Id">Izmena</button></td>
+            </tr>
+        }
+    </table>
+}
+
+@if (dbModelList != null && dbModelList.Count > 0)
+{
+    type = "db";
+    <h1>Database proizvodi</h1>
+    <table>
+        <tr>
+            <th>Naziv</th>
+            <th>Opis</th>
+            <th>Kategorija</th>
+            <th>Proizvodjac</th>
+            <th>Dobavljac</th>
+            <th>Cena</th>
+            <th>Izmena</th>
+        </tr>
+        @foreach (var dbModel in dbModelList)
+        {
+            <tr>
+                <td>@dbModel.Naziv</td>
+                <td>@dbModel.Opis</td>
+                <td>@dbModel.Kategorija</td>
+                <td>@dbModel.Proizvodjac</td>
+                <td>@dbModel.Dobavljac</td>
+                <td>@dbModel.Cena</td>
+                <td><button asp-action="EditDb" asp-controller="Home" asp-route-id="@dbModel.Id">Izmena</button></td>
+            </tr>
+        }
+    </table>
+}
+</form>
+</body>
+</html>

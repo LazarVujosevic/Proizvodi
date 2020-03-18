@@ -16,5 +16,10 @@ namespace Proizvodi.Business_Objects
             ProizvodiJsonBO jsonObjekat = JsonConvert.DeserializeObject<ProizvodiJsonBO>(json);
             return jsonObjekat;
         }
+
+        public void UpdateProizvoda(string output)
+        {
+            File.WriteAllText(jsonLokacija, output);
+        }
     }
 }

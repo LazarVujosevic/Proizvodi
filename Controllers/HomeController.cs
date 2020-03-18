@@ -1,4 +1,5 @@
-﻿using System;
+﻿using System.IO;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -7,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Proizvodi.Business_Objects;
 using Proizvodi.Models;
+using System.Text;
 
 namespace Proizvodi.Controllers
 {
@@ -24,12 +26,12 @@ namespace Proizvodi.Controllers
             var proizvodiJsonCollection = new ProizvodiJsonCollection();
             var proizvodiJson = proizvodiJsonCollection.GetProizvoda();
             var proizvodiViewModel = new ProizvodiViewModel();
-            var i = 0;
             if (proizvodiJson.proizvodi != null && proizvodiJson.proizvodi.Count() > 0)
             {
+                var i = 0;
                 foreach (var proizvod in proizvodiJson.proizvodi)
                 {
-                    var jsonModel = new JsonProizvodiBaseViewModel();
+                    var jsonModel = new ProizvodiBaseViewModel();
                     jsonModel.Id = proizvod.Id;
                     jsonModel.Naziv = proizvod.Naziv;
                     jsonModel.Opis = proizvod.Opis;
@@ -39,6 +41,25 @@ namespace Proizvodi.Controllers
                     jsonModel.Cena = proizvod.Cena;
                     proizvodiViewModel.jsonProizvodi.proizvodi.Add(jsonModel);
                     i++;
+                }
+            }
+
+            var proizvodDbCollection = new ProizvodiDBBOCollection();
+            var proizvodiIzbaze = proizvodDbCollection.GetAll();
+            if (proizvodiIzbaze != null && proizvodiIzbaze.Count > 0)
+            {
+                var i = 0;
+                foreach (var proizvod in proizvodiIzbaze)
+                {
+                    var dbModel = new ProizvodiBaseViewModel();
+                    dbModel.Id = proizvod.Id;
+                    dbModel.Naziv = proizvod.Naziv;
+                    dbModel.Opis = proizvod.Opis;
+                    dbModel.Kategorija = proizvod.Kategorija;
+                    dbModel.Proizvodjac = proizvod.Proizvodjac;
+                    dbModel.Dobavljac = proizvod.Dobavljac;
+                    dbModel.Cena = proizvod.Cena;
+                    proizvodiViewModel.dbProizvodi.proizvodi.Add(dbModel);
                 }
             }
 
@@ -54,6 +75,51 @@ namespace Proizvodi.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        [HttpGet]
+        public IActionResult EditJson(int id)
+        {
+            var proizvodiJsonCollection = new ProizvodiJsonCollection();
+            var proizvodiList = proizvodiJsonCollection.GetProizvoda();
+            var jsonProizvod = proizvodiList.proizvodi.Where(a => a.Id == id).FirstOrDefault();
+
+            var proizvod = new ProizvodiBaseViewModel();
+            proizvod.Id = jsonProizvod.Id;
+            proizvod.Naziv = jsonProizvod.Naziv;
+            proizvod.Opis = jsonProizvod.Opis;
+            proizvod.Kategorija = jsonProizvod.Kategorija;
+            proizvod.Proizvodjac = jsonProizvod.Proizvodjac;
+            proizvod.Dobavljac = jsonProizvod.Dobavljac;
+            proizvod.Cena = jsonProizvod.Cena;
+            return this.View(proizvod);
+        }
+
+        public IActionResult SaveJson(ProizvodiBaseViewModel model)
+        { 
+            var proizvodiJsonCollection = new ProizvodiJsonCollection();
+            var proizvodiJson = proizvodiJsonCollection.GetProizvoda();
+            proizvodiJson.proizvodi.Where(a => a.Id == model.Id).FirstOrDefault()
+                 .Naziv = model.Naziv;
+            proizvodiJson.proizvodi.Where(a => a.Id == model.Id).FirstOrDefault()
+                 .Opis = model.Opis;
+            proizvodiJson.proizvodi.Where(a => a.Id == model.Id).FirstOrDefault()
+                 .Kategorija = model.Kategorija;
+            proizvodiJson.proizvodi.Where(a => a.Id == model.Id).FirstOrDefault()
+                 .Proizvodjac = model.Proizvodjac;
+            proizvodiJson.proizvodi.Where(a => a.Id == model.Id).FirstOrDefault()
+                 .Dobavljac = model.Dobavljac;
+            proizvodiJson.proizvodi.Where(a => a.Id == model.Id).FirstOrDefault()
+                 .Cena = model.Cena;
+            string output = Newtonsoft.Json.JsonConvert.SerializeObject(proizvodiJson, Newtonsoft.Json.Formatting.Indented);
+            proizvodiJsonCollection.UpdateProizvoda(output);            
+
+            return this.RedirectToAction("Index");
+        }
+        public IActionResult EditDb(int id)
+        {
+
+            return this.RedirectToAction("Index");
         }
     }
 }

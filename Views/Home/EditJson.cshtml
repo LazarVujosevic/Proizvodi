@@ -1,0 +1,30 @@
+﻿@model ProizvodiBaseViewModel
+@{
+    ViewData["Title"] = "EditJson";
+}
+<form>
+    <h1>Edit Json</h1><br>
+
+    <label>Naziv</label>
+    <input asp-for="Naziv" /><br>
+
+    <label>Opis</label>
+    <input asp-for="Opis" /><br>
+
+    <label>Kategorija</label>
+    <input asp-for="Kategorija" /><br>
+
+    <label>Proizvodjac</label>
+    <input asp-for="Proizvodjac" /><br>
+
+    <label>Dobavljac</label>
+    <input asp-for="Dobavljac" /><br>
+
+    <label>Cena</label>
+    <input asp-for="Cena" /><br>
+    
+    <input hidden asp-for="Id">
+
+    <button asp-action="SaveJson" asp-controller="Home">Sacuvaj</button>
+</form>
+

@@ -9,5 +9,7 @@ namespace Proizvodi.Models
     {
         public JsonProizvodiViewModel jsonProizvodi = new JsonProizvodiViewModel();
 
+        public DbProizvodiViewModel dbProizvodi = new DbProizvodiViewModel();
+
     }
 }
