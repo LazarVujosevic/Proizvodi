@@ -1,5 +1,5 @@
 {
-  "Proizvodi": [
+  "proizvodi": [
     {
       "Id": 1,
       "Naziv": "Hard Disk",
@@ -7,7 +7,7 @@
       "Kategorija": "Elektronika",
       "Proizvodjac": "HP",
       "Dobavljac": "WinWin",
-      "Cena": "1000"
+      "Cena": 1000.0
     },
     {
       "Id": 2,
@@ -16,7 +16,7 @@
       "Kategorija": "Sport",
       "Proizvodjac": "Adidas",
       "Dobavljac": "Sport Vision",
-      "Cena": "700"
+      "Cena": 707.0
     }
   ]
 }
