@@ -1,6 +1,8 @@
 ﻿using Microsoft.Data.SqlClient;
+using Proizvodi.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -45,8 +47,65 @@ namespace Proizvodi.Business_Objects
         #endregion
 
         #region Get by id
+        public ProizvodDbBO GetById(int? id)
+        {
+            var proizvod = new ProizvodDbBO();
+            if (id != null)
+            {
 
-        
+                using (SqlConnection conn = new SqlConnection(connString))
+                {
+                    string query = $"SELECT * FROM Proizvodi WHERE id = '{id}'";
+
+                    SqlCommand cmd = new SqlCommand(query, conn);
+
+                    conn.Open();
+                    SqlDataReader dr = cmd.ExecuteReader();
+
+                    if (dr.HasRows)
+                    {
+                        while (dr.Read())
+                        {
+                            proizvod.Id = dr.GetInt32(0);
+                            proizvod.Naziv = dr.GetString(1);
+                            proizvod.Opis = dr.GetString(2);
+                            proizvod.Kategorija = dr.GetString(3);
+                            proizvod.Proizvodjac = dr.GetString(4);
+                            proizvod.Dobavljac = dr.GetString(5);
+                            proizvod.Cena = dr.GetDouble(6);
+                        }
+                    }
+                }
+            }
+
+            return proizvod;
+        }
+
+
+        #endregion
+
+        #region Insert
+
+        public void Update(ProizvodiBaseViewModel model)
+        {
+            if (model != null)
+            {
+                string query = $"UPDATE Proizvodi SET Naziv = '{model.Naziv}', " +
+                        $"Opis = '{model.Opis}', kategorija = '{model.Kategorija}', " +
+                        $"Proizvodjac = '{model.Proizvodjac}', Dobavljac = '{model.Dobavljac}', " +
+                        $"Cena = '{model.Cena}' WHERE Id = {model.Id}";
+                using (SqlConnection conn = new SqlConnection(connString))
+                {
+                    conn.Open();
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        cmd.CommandType = CommandType.Text;
+                        cmd.ExecuteNonQuery();
+                    }
+                    conn.Close();
+                }
+            }
+        }
 
         #endregion
     }

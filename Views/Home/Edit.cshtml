@@ -1,0 +1,39 @@
+﻿@model ProizvodiBaseViewModel
+@{
+    ViewData["Title"] = "Edit";
+}
+<form>
+    @{
+        var type = Model.Type == TypeWellKnownValues.json ? "JSON" : "Database item";
+        <h1>Edit @type</h1><br>
+    }
+
+    <label>Naziv</label>
+    <input asp-for="Naziv" /><br>
+
+    <label>Opis</label>
+    <input asp-for="Opis" /><br>
+
+    <label>Kategorija</label>
+    <input asp-for="Kategorija" /><br>
+
+    <label>Proizvodjac</label>
+    <input asp-for="Proizvodjac" /><br>
+
+    <label>Dobavljac</label>
+    <input asp-for="Dobavljac" /><br>
+
+    <label>Cena</label>
+    <input asp-for="Cena" /><br>
+
+    <input hidden asp-for="Id">
+    @if (Model.Type == TypeWellKnownValues.json)
+    {
+        <button asp-action="SaveJson" asp-controller="Home">Sacuvaj</button>
+    }
+    else if (Model.Type == TypeWellKnownValues.dataBase)
+    {
+        <button asp-action="SaveDb" asp-controller="Home">Sacuvaj</button>
+    }
+</form>
+

@@ -6,7 +6,7 @@
 
     var a = 2;
 
-    var type = "json";
+    var type = TypeWellKnownValues.json;
 }
 <html>
 <head>
@@ -44,7 +44,7 @@
                 <td>@jsonModel.Proizvodjac</td>
                 <td>@jsonModel.Dobavljac</td>
                 <td>@jsonModel.Cena</td>
-                <td><button asp-action="EditJson" asp-controller="Home" asp-route-id="@jsonModel.Id">Izmena</button></td>
+                <td><button asp-action="Edit" asp-controller="Home" asp-route-id="@jsonModel.Id" asp-route-type="@TypeWellKnownValues.json" formmethod="post">Izmena</button></td>
             </tr>
         }
     </table>
@@ -52,7 +52,7 @@
 
 @if (dbModelList != null && dbModelList.Count > 0)
 {
-    type = "db";
+    type = TypeWellKnownValues.dataBase;
     <h1>Database proizvodi</h1>
     <table>
         <tr>
@@ -73,7 +73,7 @@
                 <td>@dbModel.Proizvodjac</td>
                 <td>@dbModel.Dobavljac</td>
                 <td>@dbModel.Cena</td>
-                <td><button asp-action="EditDb" asp-controller="Home" asp-route-id="@dbModel.Id">Izmena</button></td>
+                <td><button asp-action="Edit" asp-controller="Home" asp-route-id="@dbModel.Id" asp-route-type="@TypeWellKnownValues.dataBase" formmethod="post">Izmena</button></td>
             </tr>
         }
     </table>

@@ -76,27 +76,50 @@ namespace Proizvodi.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-
-        [HttpGet]
-        public IActionResult EditJson(int id)
+       
+        [HttpPost]
+        public IActionResult Edit(int id, string type)
         {
-            var proizvodiJsonCollection = new ProizvodiJsonCollection();
-            var proizvodiList = proizvodiJsonCollection.GetProizvoda();
-            var jsonProizvod = proizvodiList.proizvodi.Where(a => a.Id == id).FirstOrDefault();
-
             var proizvod = new ProizvodiBaseViewModel();
-            proizvod.Id = jsonProizvod.Id;
-            proizvod.Naziv = jsonProizvod.Naziv;
-            proizvod.Opis = jsonProizvod.Opis;
-            proizvod.Kategorija = jsonProizvod.Kategorija;
-            proizvod.Proizvodjac = jsonProizvod.Proizvodjac;
-            proizvod.Dobavljac = jsonProizvod.Dobavljac;
-            proizvod.Cena = jsonProizvod.Cena;
-            return this.View(proizvod);
+            if (type == WellKnownValues.TypeWellKnownValues.json)
+            {
+                var proizvodiJsonCollection = new ProizvodiJsonCollection();
+                var proizvodiList = proizvodiJsonCollection.GetProizvoda();
+                var jsonProizvod = proizvodiList.proizvodi.Where(a => a.Id == id).FirstOrDefault();
+
+                proizvod.Id = jsonProizvod.Id;
+                proizvod.Naziv = jsonProizvod.Naziv;
+                proizvod.Opis = jsonProizvod.Opis;
+                proizvod.Kategorija = jsonProizvod.Kategorija;
+                proizvod.Proizvodjac = jsonProizvod.Proizvodjac;
+                proizvod.Dobavljac = jsonProizvod.Dobavljac;
+                proizvod.Cena = jsonProizvod.Cena;
+                proizvod.Type = WellKnownValues.TypeWellKnownValues.json;
+            }
+            else if (type == WellKnownValues.TypeWellKnownValues.dataBase)
+            {
+                var proizvodDbCollection = new ProizvodiDBBOCollection();
+                var proizvodDb = proizvodDbCollection.GetById(id);
+
+                proizvod.Id = proizvodDb.Id;
+                proizvod.Naziv = proizvodDb.Naziv;
+                proizvod.Opis = proizvodDb.Opis;
+                proizvod.Kategorija = proizvodDb.Kategorija;
+                proizvod.Proizvodjac = proizvodDb.Proizvodjac;
+                proizvod.Dobavljac = proizvodDb.Dobavljac;
+                proizvod.Cena = proizvodDb.Cena;
+                proizvod.Type = WellKnownValues.TypeWellKnownValues.dataBase;
+            }
+            else
+            {
+                this.RedirectToAction("Error");
+            }
+
+            return this.View("Edit", proizvod);
         }
 
         public IActionResult SaveJson(ProizvodiBaseViewModel model)
-        { 
+        {
             var proizvodiJsonCollection = new ProizvodiJsonCollection();
             var proizvodiJson = proizvodiJsonCollection.GetProizvoda();
             proizvodiJson.proizvodi.Where(a => a.Id == model.Id).FirstOrDefault()
@@ -112,13 +135,15 @@ namespace Proizvodi.Controllers
             proizvodiJson.proizvodi.Where(a => a.Id == model.Id).FirstOrDefault()
                  .Cena = model.Cena;
             string output = Newtonsoft.Json.JsonConvert.SerializeObject(proizvodiJson, Newtonsoft.Json.Formatting.Indented);
-            proizvodiJsonCollection.UpdateProizvoda(output);            
+            proizvodiJsonCollection.UpdateProizvoda(output);
 
             return this.RedirectToAction("Index");
         }
-        public IActionResult EditDb(int id)
-        {
 
+        public IActionResult SaveDb(ProizvodiBaseViewModel model)
+        {
+            var proizvodDbCollection = new ProizvodiDBBOCollection();
+            proizvodDbCollection.Update(model);
             return this.RedirectToAction("Index");
         }
     }

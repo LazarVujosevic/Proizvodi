@@ -142,4 +142,4 @@ D:\Projekti\Proizvodi\bin\Debug\netcoreapp3.0\tr\Microsoft.CodeAnalysis.Workspac
 D:\Projekti\Proizvodi\bin\Debug\netcoreapp3.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
 D:\Projekti\Proizvodi\bin\Debug\netcoreapp3.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
 D:\Projekti\Proizvodi\obj\Debug\netcoreapp3.0\Proizvodi.MvcApplicationPartsAssemblyInfo.cache
-D:\Projekti\Proizvodi\obj\Debug\netcoreapp3.0\Razor\Views\Home\EditJson.cshtml.g.cs
+D:\Projekti\Proizvodi\obj\Debug\netcoreapp3.0\Razor\Views\Home\Edit.cshtml.g.cs
