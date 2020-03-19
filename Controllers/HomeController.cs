@@ -119,31 +119,41 @@ namespace Proizvodi.Controllers
 
         public IActionResult SaveJson(ProizvodiBaseViewModel model)
         {
-            var proizvodiJsonCollection = new ProizvodiJsonCollection();
-            var proizvodiJson = proizvodiJsonCollection.GetProizvoda();
-            proizvodiJson.proizvodi.Where(a => a.Id == model.Id).FirstOrDefault()
-                 .Naziv = model.Naziv;
-            proizvodiJson.proizvodi.Where(a => a.Id == model.Id).FirstOrDefault()
-                 .Opis = model.Opis;
-            proizvodiJson.proizvodi.Where(a => a.Id == model.Id).FirstOrDefault()
-                 .Kategorija = model.Kategorija;
-            proizvodiJson.proizvodi.Where(a => a.Id == model.Id).FirstOrDefault()
-                 .Proizvodjac = model.Proizvodjac;
-            proizvodiJson.proizvodi.Where(a => a.Id == model.Id).FirstOrDefault()
-                 .Dobavljac = model.Dobavljac;
-            proizvodiJson.proizvodi.Where(a => a.Id == model.Id).FirstOrDefault()
-                 .Cena = model.Cena;
-            string output = Newtonsoft.Json.JsonConvert.SerializeObject(proizvodiJson, Newtonsoft.Json.Formatting.Indented);
-            proizvodiJsonCollection.UpdateProizvoda(output);
+            if (model.CanUpdate())
+            {
+                var proizvodiJsonCollection = new ProizvodiJsonCollection();
+                var proizvodiJson = proizvodiJsonCollection.GetProizvoda();
+                proizvodiJson.proizvodi.Where(a => a.Id == model.Id).FirstOrDefault()
+                     .Naziv = model.Naziv;
+                proizvodiJson.proizvodi.Where(a => a.Id == model.Id).FirstOrDefault()
+                     .Opis = model.Opis;
+                proizvodiJson.proizvodi.Where(a => a.Id == model.Id).FirstOrDefault()
+                     .Kategorija = model.Kategorija;
+                proizvodiJson.proizvodi.Where(a => a.Id == model.Id).FirstOrDefault()
+                     .Proizvodjac = model.Proizvodjac;
+                proizvodiJson.proizvodi.Where(a => a.Id == model.Id).FirstOrDefault()
+                     .Dobavljac = model.Dobavljac;
+                proizvodiJson.proizvodi.Where(a => a.Id == model.Id).FirstOrDefault()
+                     .Cena = model.Cena;
+                string output = Newtonsoft.Json.JsonConvert.SerializeObject(proizvodiJson, Newtonsoft.Json.Formatting.Indented);
+                proizvodiJsonCollection.UpdateProizvoda(output);
 
-            return this.RedirectToAction("Index");
+                return this.RedirectToAction("Index");
+            }
+
+            return this.RedirectToAction("Error");
         }
 
         public IActionResult SaveDb(ProizvodiBaseViewModel model)
         {
-            var proizvodDbCollection = new ProizvodiDBBOCollection();
-            proizvodDbCollection.Update(model);
-            return this.RedirectToAction("Index");
+            if (model.CanUpdate())
+            {
+                var proizvodDbCollection = new ProizvodiDBBOCollection();
+                proizvodDbCollection.Update(model);
+                return this.RedirectToAction("Index");
+            }
+
+            return this.RedirectToAction("Error");
         }
     }
 }
