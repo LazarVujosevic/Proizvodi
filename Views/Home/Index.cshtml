@@ -1,12 +1,8 @@
 ﻿@model ProizvodiViewModel
 @{
-    var jsonModelList = Model.jsonProizvodi.proizvodi;
+    var jsonModelList = Model.jsonProizvodi;
 
-    var dbModelList = Model.dbProizvodi.proizvodi;
-
-    var a = 2;
-
-    var type = TypeWellKnownValues.json;
+    var dbModelList = Model.dbProizvodi;
 }
 <html>
 <head>
@@ -52,7 +48,6 @@
 
 @if (dbModelList != null && dbModelList.Count > 0)
 {
-    type = TypeWellKnownValues.dataBase;
     <h1>Database proizvodi</h1>
     <table>
         <tr>
