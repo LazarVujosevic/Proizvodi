@@ -7,6 +7,6 @@ namespace Proizvodi.Business_Objects
 {
     public class ProizvodiJsonBO
     {
-        public ProizvodiJsonBaseClass[] proizvodi { get; set; }
+        public ProizvodiBase[] proizvodi { get; set; }
     }
 }

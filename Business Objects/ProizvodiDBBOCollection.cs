@@ -13,10 +13,9 @@ namespace Proizvodi.Business_Objects
         private const string connString = "Data Source=sql5052.site4now.net;Initial Catalog=DB_A5619B_Proizvodi;User ID=DB_A5619B_Proizvodi_admin;Password=proizvodi123";
 
         #region Get All
-        public List<ProizvodDbBO> GetAll()
+        public List<ProizvodiBase> GetAll()
         {
-
-            var proizvodList = new List<ProizvodDbBO>();
+            var proizvodList = new List<ProizvodiBase>();
             using (SqlConnection conn = new SqlConnection(connString))
             {
                 string query = "SELECT * FROM Proizvodi";
@@ -30,7 +29,7 @@ namespace Proizvodi.Business_Objects
                 {
                     while (dr.Read())
                     {
-                        var proizvod = new ProizvodDbBO();
+                        var proizvod = new ProizvodiBase();
                         proizvod.Id = dr.GetInt32(0);
                         proizvod.Naziv = dr.GetString(1);
                         proizvod.Opis = dr.GetString(2);
@@ -41,18 +40,18 @@ namespace Proizvodi.Business_Objects
                         proizvodList.Add(proizvod);
                     }
                 }
+                conn.Close();
             }
             return proizvodList;
         }
         #endregion
 
         #region Get by id
-        public ProizvodDbBO GetById(int? id)
+        public ProizvodiBase GetById(int? id)
         {
-            var proizvod = new ProizvodDbBO();
+            var proizvod = new ProizvodiBase();
             if (id != null)
             {
-
                 using (SqlConnection conn = new SqlConnection(connString))
                 {
                     string query = $"SELECT * FROM Proizvodi WHERE id = '{id}'";
@@ -75,6 +74,7 @@ namespace Proizvodi.Business_Objects
                             proizvod.Cena = dr.GetDouble(6);
                         }
                     }
+                    conn.Close();
                 }
             }
 
@@ -84,7 +84,7 @@ namespace Proizvodi.Business_Objects
 
         #endregion
 
-        #region Insert
+        #region Update
 
         public void Update(ProizvodiBaseViewModel model)
         {
@@ -110,7 +110,4 @@ namespace Proizvodi.Business_Objects
         #endregion
     }
 
-    public class ProizvodDbBO : ProizvodiJsonBaseClass
-    {
-    }
 }

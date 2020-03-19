@@ -39,7 +39,7 @@ namespace Proizvodi.Controllers
                     jsonModel.Proizvodjac = proizvod.Proizvodjac;
                     jsonModel.Dobavljac = proizvod.Dobavljac;
                     jsonModel.Cena = proizvod.Cena;
-                    proizvodiViewModel.jsonProizvodi.proizvodi.Add(jsonModel);
+                    proizvodiViewModel.jsonProizvodi.Add(jsonModel);
                     i++;
                 }
             }
@@ -48,7 +48,6 @@ namespace Proizvodi.Controllers
             var proizvodiIzbaze = proizvodDbCollection.GetAll();
             if (proizvodiIzbaze != null && proizvodiIzbaze.Count > 0)
             {
-                var i = 0;
                 foreach (var proizvod in proizvodiIzbaze)
                 {
                     var dbModel = new ProizvodiBaseViewModel();
@@ -59,7 +58,7 @@ namespace Proizvodi.Controllers
                     dbModel.Proizvodjac = proizvod.Proizvodjac;
                     dbModel.Dobavljac = proizvod.Dobavljac;
                     dbModel.Cena = proizvod.Cena;
-                    proizvodiViewModel.dbProizvodi.proizvodi.Add(dbModel);
+                    proizvodiViewModel.dbProizvodi.Add(dbModel);
                 }
             }
 

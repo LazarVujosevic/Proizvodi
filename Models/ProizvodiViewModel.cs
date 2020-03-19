@@ -7,9 +7,8 @@ namespace Proizvodi.Models
 {
     public class ProizvodiViewModel
     {
-        public JsonProizvodiViewModel jsonProizvodi = new JsonProizvodiViewModel();
+        public List<ProizvodiBaseViewModel> jsonProizvodi = new List<ProizvodiBaseViewModel>();
 
-        public DbProizvodiViewModel dbProizvodi = new DbProizvodiViewModel();
-
+        public List<ProizvodiBaseViewModel> dbProizvodi = new List<ProizvodiBaseViewModel>();
     }
 }

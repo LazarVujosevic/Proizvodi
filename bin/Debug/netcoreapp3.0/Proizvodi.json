@@ -2,12 +2,12 @@
   "proizvodi": [
     {
       "Id": 1,
-      "Naziv": "Hard Disk3",
+      "Naziv": "Hard Disk",
       "Opis": "Disk za cuvanje podataka",
       "Kategorija": "Elektronika",
-      "Proizvodjac": "HP",
-      "Dobavljac": "WinWin",
-      "Cena": 1038.0
+      "Proizvodjac": "SanDisks",
+      "Dobavljac": "Desk",
+      "Cena": 1059.0
     },
     {
       "Id": 2,

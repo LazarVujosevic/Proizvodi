@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Proizvodi.Business_Objects
 {
-    public class ProizvodiJsonBaseClass
+    public class ProizvodiBase
     {
         public int Id { get; set; }
 
