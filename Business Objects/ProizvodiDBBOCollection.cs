@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Proizvodi.Business_Objects
 {
-    public class ProizvodiDBBOCollection
+    public class ProizvodiDBBOCollection 
     {
         private const string connString = "Data Source=sql5052.site4now.net;Initial Catalog=DB_A5619B_Proizvodi;User ID=DB_A5619B_Proizvodi_admin;Password=proizvodi123";
 
