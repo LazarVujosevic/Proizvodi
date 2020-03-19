@@ -2,12 +2,12 @@
   "proizvodi": [
     {
       "Id": 1,
-      "Naziv": "Hard Disk",
+      "Naziv": "Hard Disk3",
       "Opis": "Disk za cuvanje podataka",
       "Kategorija": "Elektronika",
       "Proizvodjac": "HP",
       "Dobavljac": "WinWin",
-      "Cena": 1000.0
+      "Cena": 1038.0
     },
     {
       "Id": 2,
@@ -16,7 +16,7 @@
       "Kategorija": "Sport",
       "Proizvodjac": "Adidas",
       "Dobavljac": "Sport Vision",
-      "Cena": 707.0
+      "Cena": 709.0
     }
   ]
 }

@@ -20,5 +20,7 @@ namespace Proizvodi.Models
         public string Dobavljac { get; set; }
 
         public double? Cena { get; set; }
+
+        public string Type { get; set; }
     }
 }
